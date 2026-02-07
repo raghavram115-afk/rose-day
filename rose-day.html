@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Rose Day 🌹</title>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #ff758c, #ff7eb3);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.card {
+  background: rgba(255,255,255,0.25);
+  padding: 30px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  z-index: 2;
+  max-width: 420px;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+h1 {
+  font-size: 2.3em;
+  margin: 10px 0;
+}
+
+p {
+  font-size: 1.15em;
+  line-height: 1.6;
+}
+
+.rose {
+  font-size: 3em;
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Falling items */
+.fall {
+  position: fixed;
+  top: -50px;
+  font-size: 24px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+/* Music button */
+#musicBtn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 30px;
+  background: #ff4d6d;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Hidden message */
+#hiddenMsg {
+  display: none;
+  margin-top: 20px;
+  font-size: 1.1em;
+  opacity: 0.95;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+  <!-- REPLACE IMAGE URL IN CODEPEN -->
+  <img src="rose-photo.jpg" alt="Someone Special">
+
+  <div class="rose">🌹</div>
+  <h1>Happy Rose Day</h1>
+
+  <p>
+    Some people don’t need a label to be special.<br>
+    They just quietly become important.<br><br>
+
+    This rose is for you —<br>
+    for the warmth you bring,<br>
+    the smiles you don’t even realize you give me,<br>
+    and the place you hold in my heart.
+  </p>
+
+  <button id="musicBtn">Tap to Play Music 🎶</button>
+
+  <div id="hiddenMsg">
+    💌 Maybe you don’t know this…<br>
+    but you mean more to me than you think.
+  </div>
+</div>
+
+<script>
+let symbol = "🌹";
+
+// Play music
+document.getElementById("musicBtn").onclick = () => {
+  document.getElementById("bgMusic").play();
+  document.getElementById("musicBtn").style.display = "none";
+};
+
+// Falling animation
+function createFall() {
+  const item = document.createElement("div");
+  item.classList.add("fall");
+  item.innerHTML = symbol;
+  item.style.left = Math.random() * 100 + "vw";
+  item.style.animationDuration = (Math.random() * 3 + 4) + "s";
+  document.body.appendChild(item);
+
+  setTimeout(() => item.remove(), 7000);
+}
+
+setInterval(createFall, 400);
+
+// Switch roses → hearts after 5 seconds
+setTimeout(() => {
+  symbol = "❤️";
+}, 5000);
+
+// Reveal hidden message after 8 seconds
+setTimeout(() => {
+  document.getElementById("hiddenMsg").style.display = "block";
+}, 8000);
+</script>
+
+</body>
+</html>
